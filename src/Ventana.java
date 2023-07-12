@@ -1,6 +1,4 @@
-import java.text.DecimalFormat;
 import java.util.Arrays;
-
 import javax.swing.JOptionPane;
 
 public class Ventana {
@@ -10,10 +8,8 @@ public class Ventana {
 		 boolean regresarPantallaPrincipal = false;
 
 	        do {
-		
 		 String[] opciones = {"Conversor de Moneda", "Conversor de Temperatura", "Salir del Programa"};
 
-		 
 	        // Mostrar ventana de opciones
 	        String opcion = (String) JOptionPane.showInputDialog(
 	                null, // Componente padre (en este caso, nulo para una ventana independiente)
@@ -25,8 +21,8 @@ public class Ventana {
 	                opciones[0] // Opción predeterminada seleccionada
 	                );
 
+	       
 	        
-	    
 	        // Procesar la opción seleccionada
 	        if (opcion != null) {
 	        	if (opcion.equals("Salir del Programa")) {
@@ -36,9 +32,21 @@ public class Ventana {
 	        	 
 	        }   else if (opcion.equals("Conversor de Moneda")) {
 	        	System.out.println("Opción seleccionada: " + opcion);
-	        	
-	        	double input = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese la cantidad a convertir:"));
-	        	
+	        
+	             	
+	         //double input = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese la cantidad a convertir:"));
+	        
+	        	 double input = 0.0;
+	                boolean validInput = false;
+
+	                do {
+	                    try {
+	                        input = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese la cantidad a convertir:"));
+	                        validInput = true;
+	                    } catch (NumberFormatException e) {
+	                        JOptionPane.showMessageDialog(null, "Valor no válido. Por favor, ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+	                    }
+	                } while (!validInput);
 	        	
 	        	String [] conversion = {"De Pesos a Dolares","De Pesos a Euros","De Pesos a Yenes",
 	        			"De Pesos a Lira Turca","De Pesos a Rupias"};
@@ -46,12 +54,11 @@ public class Ventana {
 	        		String conversionSeleccionada = (String) JOptionPane.showInputDialog(
 	        			null, "Eliga una opcion", "Conversor de Moneda", JOptionPane.QUESTION_MESSAGE, 
 	        			null, conversion,  conversion[0] );
+	        		        
 	        	
 	        		int actividad = Arrays.asList(conversion).indexOf(conversionSeleccionada);
 	        	
-	        	
 	        	//JOptionPane.showMessageDialog(null, "ACTIVIDAD " + actividad );
-
 	        	double resultado;
 				switch (actividad){
 	            case 0:	
@@ -76,13 +83,28 @@ public class Ventana {
 	                break;
 	                
 	            default:
-	                System.out.println("Opción de conversión no válida.");
+	                JOptionPane.showMessageDialog(null, "Opción de conversión no válida.", "Error", JOptionPane.ERROR_MESSAGE);
+	                
+	          //  default:
+	               // System.out.println("Opción de conversión no válida.");
 			
-	        		System.exit(0);
+	        		//System.exit(0);
 	        }
 	        	}  else if (opcion.equals("Conversor de Temperatura")) {
 	        		
-	        		double input = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese la cantidad de temperatura a convertir:"));
+	        		double input = 0.0;
+	                boolean validInput = false;
+
+	                do {
+	                    try {
+	                        input = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese la cantidad de temperatura a convertir:"));
+	                        validInput = true;
+	                    } catch (NumberFormatException e) {
+	                        JOptionPane.showMessageDialog(null, "Valor no válido. Por favor, ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+	                    }
+	                } while (!validInput);
+	        		
+	        		//double input = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese la cantidad de temperatura a convertir:"));
 		        	
 		        	
 		        	String [] conversion = {"De Celsius a Farenheiet","De Celsius a Kelvin","De Farenheiet a Celsius",
@@ -93,40 +115,41 @@ public class Ventana {
 		        			null, conversion,  conversion[0] );
 		        	
 		        		int actividad = Arrays.asList(conversion).indexOf(conversionSeleccionada);
-		        	
-		        	
+		        	        	
 		        	//JOptionPane.showMessageDialog(null, "ACTIVIDAD " + actividad );
-
 		        	double resultado;
 					switch (actividad){
 		            case 0:	
-		                resultado = input * 0.059;  // Factor de conversión de Celsius a Farenheiet
-		                JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en dólares." );
+		                resultado = ((input * 9/5) + 32);  // Factor de conversión de Celsius a Farenheiet
+		                JOptionPane.showMessageDialog(null, "De " + input + " grados celsius a Farenheiet son " + resultado + " grados." );
 		                break;
 		            case 1:
-		                resultado = input * 0.053;  // Factor de conversión de Celsius a Kelvin
-		                JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en dólares.");
+		                resultado = input + 273.15;  // Factor de conversión de Celsius a Kelvin
+		                JOptionPane.showMessageDialog(null, "De " + input + " grados celsius a Kelvin son " + resultado + " grados.");
 		                break;
 		            case 2:
-		                resultado = input * 8.24;  // Factor de conversión de Farenheiet a Celsius
-		                JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en dólares.");
+		                resultado = ((input - 32) * 5/9);  // Factor de conversión de Farenheiet a Celsius
+		                JOptionPane.showMessageDialog(null, "De " + input + " grados Farenheiet a celsius son " + resultado + " grados.");
 		                break;
 		            case 3:
-		                resultado = input * 1.53;  // Factor de conversión de Farenheiet a Kelvin
-		                JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en dólares.");
+		                resultado = ((input + 459.67) * 5/9);  // Factor de conversión de Farenheiet a Kelvin
+		                JOptionPane.showMessageDialog(null, "De " + input + " grados Farenheiet a Kelvin son " + resultado + " grados.");
 		                break;
 		            case 4:
-		                resultado = input * 4.83;  // Factor de conversión de Kelvin a Farenheiet
-		                JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en dólares.");
+		                resultado = ((input * 9/5) - 459.67);  // Factor de conversión de Kelvin a Farenheiet
+		                JOptionPane.showMessageDialog(null, "De " + input + " grados Kelvin a Farenheiet son " + resultado + " grados.");
 		                break;
 		            case 5:
-		                resultado = input * 4.83;  // Factor de conversión de Kelvin a Celsius
-		                JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en dólares.");
+		                resultado = input + 273.15;  // Factor de conversión de Kelvin a Celsius
+		                JOptionPane.showMessageDialog(null, "De " + input + " grados Kelvin a celsius son " + resultado + " grados.");
 		                break;
 		                
 		            default:
-		                System.out.println("Opción de conversión no válida.");
-		                System.exit(0);
+		                JOptionPane.showMessageDialog(null, "Opción de conversión no válida.", "Error", JOptionPane.ERROR_MESSAGE);
+		                
+		            //default:
+		             //   System.out.println("Opción de conversión no válida.");
+		               // System.exit(0);
 					} 	
 	        	}
 	        }
