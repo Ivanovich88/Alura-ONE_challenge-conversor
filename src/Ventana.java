@@ -49,7 +49,8 @@ public class Ventana {
 	                } while (!validInput);
 	        	
 	        	String [] conversion = {"De Pesos a Dolares","De Pesos a Euros","De Pesos a Yenes",
-	        			"De Pesos a Lira Turca","De Pesos a Rupias"};
+	        			"De Pesos a Lira Turca","De Pesos a Rupias", "De Dolares a Pesos","De Euros a Pesos","De Yenes a Pesos",
+	        			"De Lira Turca a Pesos","De Rupias a Pesos"};
 	        		
 	        		String conversionSeleccionada = (String) JOptionPane.showInputDialog(
 	        			null, "Eliga una opcion", "Conversor de Moneda", JOptionPane.QUESTION_MESSAGE, 
@@ -75,20 +76,39 @@ public class Ventana {
 	                break;
 	            case 3:
 	                resultado = input * 1.53;  // Factor de conversión de pesos a liras
-	                JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en liras.");
+	                JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en liras turcas.");
 	                break;
 	            case 4:
 	                resultado = input * 4.83;  // Factor de conversión de pesos a rupias
 	                JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en rupias.");
 	                break;
 	                
+	            case 5:
+                    resultado = input / 0.059;  // Factor de conversión de dólares a pesos (inverso)
+                    JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en pesos.");
+                    break;
+                case 6:
+                    resultado = input / 0.053;  // Factor de conversión de euros a pesos (inverso)
+                    JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en pesos.");
+                    break;
+                case 7:
+                    resultado = input / 8.24;  // Factor de conversión de yenes a pesos (inverso)
+                    JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en pesos.");
+                    break;
+                case 8:
+                    resultado = input / 1.53;  // Factor de conversión de liras a pesos (inverso)
+                    JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en pesos.");
+                    break;
+                case 9:
+                    resultado = input / 4.83;  // Factor de conversión de rupias a pesos (inverso)
+                    JOptionPane.showMessageDialog(null, "Tienes $" + resultado + " en pesos.");
+                    break;
+	                
+	                
 	            default:
 	                JOptionPane.showMessageDialog(null, "Opción de conversión no válida.", "Error", JOptionPane.ERROR_MESSAGE);
 	                
-	          //  default:
-	               // System.out.println("Opción de conversión no válida.");
-			
-	        		//System.exit(0);
+	        
 	        }
 	        	}  else if (opcion.equals("Conversor de Temperatura")) {
 	        		
